@@ -1,0 +1,48 @@
+global:
+  domain: ${CORALOGIX_DOMAIN}
+  clusterName: ${CLUSTER_NAME}
+  deploymentEnvironmentName: ${DEPLOYMENT_ENVIRONMENT}
+
+opentelemetry-cluster-collector:
+  presets:
+    kubernetesEvents:
+      enabled: true
+    kubernetesResources:
+      enabled: true
+    clusterMetrics:
+      enabled: true
+    collectorMetrics:
+      enabled: true
+    resourceDetection:
+      enabled: true
+      deploymentEnvironmentName: ${DEPLOYMENT_ENVIRONMENT}
+    reduceResourceAttributes:
+      enabled: true
+  provider: on_prem
+
+opentelemetry-agent:
+  presets:
+    logsCollection:
+      enabled: true
+    kubeletMetrics:
+      enabled: true
+    hostMetrics:
+      enabled: true
+    collectorMetrics:
+      enabled: true
+    resourceDetection:
+      enabled: true
+      deploymentEnvironmentName: ${DEPLOYMENT_ENVIRONMENT}
+    spanMetrics:
+      enabled: true
+    headSampling:
+      enabled: true
+      percentage: 10.0
+    coralogixExporter:
+      enabled: true
+      privateKey: ${env:CORALOGIX_PRIVATE_KEY}
+      pipelines:
+        - logs
+        - metrics
+        - traces
+  provider: on_prem

@@ -1,0 +1,22 @@
+# Secrets / local environment
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*secret*
+*credentials*
+key_*.json
+
+# Kubernetes / Helm local output
+rendered/
+manifests.yaml
+*.tgz
+
+# macOS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
